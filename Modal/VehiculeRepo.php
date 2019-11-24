@@ -26,4 +26,26 @@ class VehiculeRepo
         $bdd->close();
         return $vehicules;
     }
+
+    public function getOne($id) {
+        $bdd = new BDD();
+        $con = $bdd->connexion();
+
+        $data = $con->query("select * from vehicule where id=$id");
+
+        $vehicules = array();
+
+        // Pas de service ni de endpoint, ni de mapper, ni conteneur etc... ( trop petit projet )
+        foreach ($data as $row) {
+            $vehicule = new VehiculeEntity();
+            $vehicule->setId($row['id']);
+            $vehicule->setType($row['type']);
+            $vehicule->setMarque($row['marque']);
+
+            array_push($vehicules, $vehicule);
+        }
+
+        $bdd->close();
+        return $vehicules;
+    }
 }

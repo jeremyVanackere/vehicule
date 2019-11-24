@@ -10,7 +10,12 @@ include 'Controller/VehiculeController.php'
 
 <body>
 
-<?php echo getAllVehicule(); ?>
+<?php
+if(!isset($_GET['id']))
+    echo getAllVehicule();
+else
+    echo getOneVehicule($_GET['id']);
+?>
 
 </body>
 </html>
